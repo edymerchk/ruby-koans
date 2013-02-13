@@ -2,9 +2,20 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 # Implement a DiceSet Class here:
 #
-# class DiceSet
-#   code ...
-# end
+class DiceSet
+
+ def roll size
+  while values = (1..size).map { rand(6) + 1 } and values == @values
+    
+  end
+
+  @values = values
+end
+
+def values
+  @values
+end
+end
 
 class AboutDiceProject < EdgeCase::Koan
   def test_can_create_a_dice_set
@@ -41,7 +52,7 @@ class AboutDiceProject < EdgeCase::Koan
     second_time = dice.values
 
     assert_not_equal first_time, second_time,
-      "Two rolls should not be equal"
+    "Two rolls should not be equal"
 
     # THINK ABOUT IT:
     #
