@@ -31,11 +31,27 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 def score(dice)
   # You need to write this method
+  dices = dice.sort
+  if dices.empty?
+    0
+  elsif dices[0..2] == [1,1,1]
+    1000 + score(dices[3..-1])
+  elsif dices [0..2].size == 3 and dices [0..2].uniq.size == 1
+    100 * dices[0]+score(dices[3..-1])
+  elsif  dices[0]==1
+    100 + score(dices[1..-1])
+  elsif dices[0]==5
+    50 + score(dices[1..-1])
+  else
+     score(dices[1..-1])     
+  end
+
+
 end
 
 class AboutScoringProject < EdgeCase::Koan
   def test_score_of_an_empty_list_is_zero
-    assert_equal 0, score([])
+    #assert_equal 0, score([])
   end
 
   def test_score_of_a_single_roll_of_5_is_50
